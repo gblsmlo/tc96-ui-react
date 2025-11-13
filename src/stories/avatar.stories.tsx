@@ -1,5 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui'
-import type { AvatarProps } from '@/components/ui/avatar/avatar.variants'
+import { Avatar, AvatarFallback, AvatarImage, type AvatarProps } from '@/components/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

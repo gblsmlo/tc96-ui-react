@@ -1,4 +1,4 @@
-import { cn } from '@/lib/cn'
+import { cn } from '@/libs/utils'
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
 import type { VariantProps } from 'class-variance-authority'
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
