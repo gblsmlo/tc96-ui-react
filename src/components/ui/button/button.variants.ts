@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 export type ButtonProps = VariantProps<typeof buttonVariants>
 
 export const buttonVariants = cva(
-	'inline-flex items-center justify-center gap-2 transition-color ease-linear duration-150 whitespace-nowrap rounded-md text-sm font-semibold hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0',
+	'inline-flex items-center justify-center gap-2 transition-color ease-linear duration-75 whitespace-nowrap rounded-sm text-sm font-semibold disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0',
 	{
 		defaultVariants: {
 			size: 'base',
@@ -22,7 +22,7 @@ export const buttonVariants = cva(
 				link: 'text-accent underline-offset-4 hover:underline',
 				outline:
 					'border border-accent/20 bg-transparent hover:bg-accent hover:text-accent-foreground text-accent',
-				solid: 'bg-accent text-accent-foreground hover:bg-accent/90',
+				solid: 'bg-accent text-accent-foreground hover:bg-accent/80',
 			},
 		},
 	},
