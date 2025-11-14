@@ -18,7 +18,7 @@ export const Default: Story = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge')
+		const badge = canvas.getByText('Default')
 
 		await expect(badge).toHaveClass(/inline-flex/)
 		await expect(badge).toHaveClass(/items-center/)
@@ -31,7 +31,7 @@ export const Default: Story = {
 		await expect(badge).toHaveClass(/text-primary-foreground/)
 		await expect(badge).toHaveClass(/border-transparent/)
 
-		await expect(badge).toHaveTextContent('Default')
+		await expect(badge).toHaveAttribute('data-slot', 'badge')
 	},
 }
 
@@ -42,13 +42,13 @@ export const Secondary: Story = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge')
+		const badge = canvas.getByText('Secondary')
 
 		await expect(badge).toHaveClass(/bg-secondary/)
 		await expect(badge).toHaveClass(/text-secondary-foreground/)
 		await expect(badge).toHaveClass(/border-transparent/)
 
-		await expect(badge).toHaveTextContent('Secondary')
+		await expect(badge).toHaveAttribute('data-slot', 'badge')
 	},
 }
 
@@ -59,13 +59,13 @@ export const Destructive: Story = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge')
+		const badge = canvas.getByText('Destructive')
 
 		await expect(badge).toHaveClass(/bg-destructive/)
 		await expect(badge).toHaveClass(/text-destructive-foreground/)
 		await expect(badge).toHaveClass(/border-transparent/)
 
-		await expect(badge).toHaveTextContent('Destructive')
+		await expect(badge).toHaveAttribute('data-slot', 'badge')
 	},
 }
 
@@ -76,11 +76,11 @@ export const Outline: Story = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge')
+		const badge = canvas.getByText('Outline')
 
 		await expect(badge).toHaveClass(/text-foreground/)
 
-		await expect(badge).toHaveTextContent('Outline')
+		await expect(badge).toHaveAttribute('data-slot', 'badge')
 	},
 }
 
@@ -91,12 +91,12 @@ export const CustomClassName: Story = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge')
+		const badge = canvas.getByText('Custom')
 
 		await expect(badge).toHaveClass(/bg-blue-500/)
 		await expect(badge).toHaveClass(/text-white/)
 
-		await expect(badge).toHaveTextContent('Custom')
+		await expect(badge).toHaveAttribute('data-slot', 'badge')
 	},
 }
 

@@ -6,9 +6,7 @@ export function Badge({
 	variant,
 	...props
 }: React.HTMLAttributes<HTMLDivElement> & BadgeProps) {
-	return (
-		<div className={cn(badgeVariants({ variant }), className)} data-testId="badge" {...props} />
-	)
+	return <div className={cn(badgeVariants({ variant }), className)} data-slot="badge" {...props} />
 }
 
 export { badgeVariants, type BadgeProps }
