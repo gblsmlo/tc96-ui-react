@@ -1,17 +1,15 @@
 import { cn } from '@/libs/utils'
 import { Slot } from '@radix-ui/react-slot'
-import { type ButtonProps, buttonVariants } from './button.variants'
+import type { VariantProps } from 'class-variance-authority'
+import type { ComponentProps } from 'react'
+import { buttonVariants } from './button.variants'
 
-export function Button({
-	className,
-	variant,
-	size,
-	asChild = false,
-	...props
-}: React.ComponentProps<'button'> &
-	ButtonProps & {
+export type ButtonProps = ComponentProps<'button'> &
+	VariantProps<typeof buttonVariants> & {
 		asChild?: boolean
-	}) {
+	}
+
+export function Button({ className, variant, size, asChild = false, ...props }: ButtonProps) {
 	const Component = asChild ? Slot : 'button'
 
 	return (
