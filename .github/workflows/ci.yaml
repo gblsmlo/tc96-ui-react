@@ -32,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Setup Playwright (cached)
-        uses: microsoft/playwright-github-action@v1
+      - name: Install Playwright (Chromium only)
+        run: pnpm exec playwright install --with-deps chromium
 
       - name: Linting
         run: pnpm lint:ci
