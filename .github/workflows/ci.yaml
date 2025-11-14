@@ -36,7 +36,13 @@ jobs:
         run: pnpm lint:ci
 
       - name: Type Checking
-        run: pnpm type-check
+        run: pnpm check:type
+
+      - name: Build Library
+        run: pnpm build
 
       - name: Tests
         run: pnpm test:ci
+
+      - name: Build Storybook
+        run: pnpm build:storybook

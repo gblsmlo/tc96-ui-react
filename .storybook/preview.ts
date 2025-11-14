@@ -24,10 +24,10 @@ const preview: Preview = {
 		}),
 	],
 	initialGlobals: {
-    a11y: {
-      manual: false,
-    },
-  },
+		a11y: {
+			manual: false,
+		},
+	},
 }
 
 export default preview

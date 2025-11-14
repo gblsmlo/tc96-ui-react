@@ -1,7 +1,7 @@
 {
   "name": "@tc96/ui-react",
   "private": false,
-  "version": "0.1.2",
+  "version": "0.2.0",
   "files": [
     "dist"
   ],
@@ -33,6 +33,7 @@
     "lint:ci": "biome check --error-on-warnings .",
     "prepare": "husky",
     "test": "vitest",
+    "test:ci": "vitest run",
     "test-storybook": "vitest --project=storybook",
     "check:type": "tsc --noEmit",
     "check:updates": "npm-check-updates -i --color"

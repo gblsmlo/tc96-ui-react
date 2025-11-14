@@ -7,7 +7,6 @@
 		{ "path": "./tsconfig.storybook.json" }
 	],
 	"compilerOptions": {
-		"ignoreDeprecations": "6.0",
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"]
