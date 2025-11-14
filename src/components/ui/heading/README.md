@@ -90,7 +90,7 @@ The `className` prop can be used to add custom styles:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `as` | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | `'h2'` | The HTML heading element to render |
+| `as` | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | `'h1'` | The HTML heading element to render |
 | `size` | `'2xl' \| 'xl' \| 'lg' \| 'base' \| 'sm' \| 'xs'` | `'base'` | The text size of the heading |
 | `className` | `string` | `undefined` | Additional CSS classes to apply |
 
