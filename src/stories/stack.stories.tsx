@@ -1,4 +1,4 @@
-import { Stack } from '@/components/ui/stack'
+import { Stack, type StackProps } from '@/components/ui/stack'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, within } from 'storybook/test'
 
@@ -39,7 +39,7 @@ const meta = {
 	},
 	tags: ['autodocs'],
 	title: 'Components/Stack',
-} satisfies Meta<typeof Stack>
+} satisfies Meta<StackProps>
 
 export default meta
 type Story = StoryObj<typeof meta>
