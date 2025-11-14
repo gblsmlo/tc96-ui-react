@@ -110,12 +110,6 @@ Controls which HTML element is rendered.
   <Heading>Section Title</Heading>
   <Text>Section content</Text>
 </Stack>
-
-<Stack as="ul" role="list">
-  <li>List item 1</li>
-  <li>List item 2</li>
-  <li>List item 3</li>
-</Stack>
 ```
 
 ## Custom Styling
