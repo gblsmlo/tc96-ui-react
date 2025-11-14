@@ -100,8 +100,6 @@ Controls which HTML element is rendered.
 
 - **`div`** (default) - Generic container
 - **`section`** - Semantic section element
-- **`ul`** - Unordered list (use with list items)
-- **`ol`** - Ordered list (use with list items)
 
 ### Examples
 
@@ -129,25 +127,10 @@ The `className` prop can be used to add custom styles:
 
 - Default to `<div>` for generic containers
 - Use `<section>` for landmark regions
-- Use `<ul>` or `<ol>` only when the content is a list
-- When using `as="ul"` or `as="ol"`, ensure children are `<li>` elements
 
 ### Document Structure
 
 Stack is a presentational component and does not alter document outline or heading hierarchy. It's safe to use for any layout without semantic concerns.
-
-### Example: Semantic List
-
-```tsx
-<Stack as="ul" space="base" role="list">
-  <li>
-    <Text>First item</Text>
-  </li>
-  <li>
-    <Text>Second item</Text>
-  </li>
-</Stack>
-```
 
 ## Common Patterns
 

@@ -1,6 +1,6 @@
 import { cn } from '@/libs/utils'
 import type { VariantProps } from 'class-variance-authority'
-import type { ComponentPropsWithoutRef, ElementType } from 'react'
+import type { ComponentPropsWithoutRef, ComponentRef, ElementType } from 'react'
 import { forwardRef } from 'react'
 import { stackVariants } from './stack.variants'
 
@@ -11,7 +11,7 @@ export type StackProps = ComponentPropsWithoutRef<'div'> &
 		as?: StackElement
 	}
 
-export const Stack = forwardRef<HTMLElement, StackProps>(
+export const Stack = forwardRef<ComponentRef<'div'>, StackProps>(
 	({ className, space, align, justify, as, ...props }) => {
 		const Component: ElementType = as || 'div'
 
