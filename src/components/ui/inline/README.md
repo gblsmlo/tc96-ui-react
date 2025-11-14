@@ -255,7 +255,7 @@ Inline is a presentational component and does not alter document outline or head
 | `align` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'center'` | Vertical alignment of children |
 | `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | `'start'` | Horizontal distribution of children |
 | `wrap` | `boolean` | `true` | Whether children wrap to new lines |
-| `as` | `'div' \| 'section' \| 'nav' \| `'div'` | HTML element to render |
+| `as` | `'div' \| 'section' \| 'nav' \| 'span'` | `'div'` | HTML element to render |
 | `className` | `string` | `undefined` | Additional CSS classes to apply |
 
 The component also accepts all standard HTML attributes for the chosen element.
