@@ -1,6 +1,9 @@
 name: release
 
 on:
+  push:
+    branches:
+      - main
   release:
     types: [ published ]
 
@@ -9,7 +12,88 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    concurrency:
+      group: release-creation
+      cancel-in-progress: true
+    
+    outputs:
+      should_release: ${{ steps.version-check.outputs.should_release }}
+      version: ${{ steps.version-check.outputs.version }}
+    
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+      
+      - name: Detect version change
+        id: version-check
+        run: |
+          # ====================================================================
+          # VERSION EXTRACTION LOGIC
+          # ====================================================================
+          # Extract the current version from package.json using Node.js
+          # This uses Node's require() to parse the JSON and access the version field
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+          
+          # ====================================================================
+          # PREVIOUS VERSION RETRIEVAL
+          # ====================================================================
+          # Temporarily checkout package.json from the previous commit (HEAD~1)
+          # to compare versions and detect if a version bump occurred
+          # The 2>/dev/null suppresses error messages if no previous commit exists
+          git checkout HEAD~1 package.json 2>/dev/null || {
+            # Handle edge case: first commit in repository (no previous version)
+            echo "No previous commit found, this might be the first commit"
+            echo "should_release=false" >> $GITHUB_OUTPUT
+            exit 0
+          }
+          
+          # Extract the previous version from the checked-out package.json
+          PREVIOUS_VERSION=$(node -p "require('./package.json').version")
+          echo "Previous version: $PREVIOUS_VERSION"
+          
+          # Restore the current package.json (undo the temporary checkout)
+          git checkout HEAD package.json
+          
+          # ====================================================================
+          # VERSION COMPARISON LOGIC
+          # ====================================================================
+          # Compare the two versions to determine if a release should be created
+          # A simple string comparison is sufficient since we only need to detect changes
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            # Version has changed - set outputs to trigger release creation
+            echo "Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          else
+            # No version change - skip release creation
+            echo "No version change detected"
+            echo "should_release=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create GitHub Release
+        if: steps.version-check.outputs.should_release == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version-check.outputs.version }}
+          name: v${{ steps.version-check.outputs.version }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   publish:
+    if: github.event_name == 'release' && github.event.action == 'published'
     runs-on: ubuntu-latest
 
     steps:
@@ -23,9 +107,9 @@ jobs:
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org
-          cache: 'pnpm'
+          node-version: 22                             
+          registry-url: https://registry.npmjs.org     
+          cache: 'pnpm'                                
 
       - name: Delete prepare script
         run: npm pkg delete scripts.prepare
