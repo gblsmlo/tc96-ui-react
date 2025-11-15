@@ -1,42 +1,59 @@
 name: ci
 
 on:
-  pull_request:
-    branches: [develop, main]
   push:
-    branches: [develop]
-
-permissions:
-  contents: read
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  lint-type-build:
+  ci:
     runs-on: ubuntu-latest
+    env:
+      STORYBOOK_DISABLE_TELEMETRY: '1'
+    strategy:
+      matrix:
+        node-version: [ 22 ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      - name: Setup pnpm
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: '10'
 
-      - name: Setup Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Delete prepare script
+        run: pnpm pkg delete scripts.prepare
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm run lint:ci
+      - name: Install Playwright (Chromium only)
+        run: pnpm exec playwright install --with-deps chromium
 
-      - name: Type check
-        run: pnpm run check:type
+      - name: Verify Playwright install
+        run: |
+          pnpm exec playwright --version
+          echo "Playwright cache contents:"
+          ls -la "$HOME/.cache/ms-playwright" || true
 
-      - name: Build
-        run: pnpm run build
+      - name: Linting
+        run: pnpm lint:ci
+
+      - name: Type Checking
+        run: pnpm check:type
+
+      - name: Tests
+        run: pnpm test:ci
+
+      - name: Build Library
+        run: pnpm build
+
+      - name: Build Storybook
+        run: pnpm build:storybook
