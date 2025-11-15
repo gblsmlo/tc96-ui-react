@@ -4,6 +4,10 @@ on:
   release:
     types: [ published ]
 
+concurrency:
+  group: publish-release
+  cancel-in-progress: true
+
 jobs:
   publish:
     runs-on: ubuntu-latest
