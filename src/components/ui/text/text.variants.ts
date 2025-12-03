@@ -5,6 +5,12 @@ export const textVariants = cva('leading-normal text-foreground', {
 		size: 'base',
 	},
 	variants: {
+		color: {
+			destructive: 'text-destructive',
+			muted: 'text-muted',
+			primary: 'text-primary',
+			secondary: 'text-secondary',
+		},
 		size: {
 			base: 'text-base',
 			lg: 'text-lg',
