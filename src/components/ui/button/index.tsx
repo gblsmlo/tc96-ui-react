@@ -10,13 +10,13 @@ export type ButtonProps = ComponentProps<'button'> &
 		asChild?: boolean
 	}
 
-const Button = forwardRef<ComponentRef<'button'>, ButtonProps>(
-	({ className, variant, size, asChild = false, ...props }, ref) => {
+export const Button = forwardRef<ComponentRef<'button'>, ButtonProps>(
+	({ className, variant, size, isIcon, asChild = false, ...props }, ref) => {
 		const Component = asChild ? Slot : 'button'
 
 		return (
 			<Component
-				className={cn(buttonVariants({ className, size, variant }))}
+				className={cn(buttonVariants({ className, isIcon, size, variant }))}
 				data-slot="button"
 				data-testid="button"
 				ref={ref}
@@ -27,5 +27,3 @@ const Button = forwardRef<ComponentRef<'button'>, ButtonProps>(
 )
 
 Button.displayName = 'Button'
-
-export { Button }
