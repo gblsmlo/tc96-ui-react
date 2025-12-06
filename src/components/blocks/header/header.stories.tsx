@@ -48,7 +48,7 @@ export const Default: Story = {
 				</nav>
 			</HeaderCenter>
 			<HeaderRight>
-				<Button variant="ghost">
+				<Button isIcon variant="ghost">
 					<Sun className="h-4 w-4" />
 				</Button>
 				<Button>Download</Button>
@@ -79,7 +79,7 @@ export const WithAuthButtons: Story = {
 			</HeaderCenter>
 			<HeaderRight>
 				<div className="flex gap-2">
-					<Button variant="secondary">Login</Button>
+					<Button variant="ghost">Login</Button>
 					<Button>Sign Up</Button>
 				</div>
 			</HeaderRight>

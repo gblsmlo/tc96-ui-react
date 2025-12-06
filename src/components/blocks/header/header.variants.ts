@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority'
 
-export const headerVariants = cva('w-full border-b border-border transition-all duration-200', {
+const headerVariants = cva('w-full border-b border-border transition-all duration-200', {
 	defaultVariants: {
 		position: 'relative',
 		variant: 'default',
@@ -19,12 +19,20 @@ export const headerVariants = cva('w-full border-b border-border transition-all 
 	},
 })
 
-export const headerContainerVariants = cva(
+const headerContainerVariants = cva(
 	'container mx-auto flex h-20 items-center justify-between px-4 md:px-6',
 )
 
-export const headerLeftVariants = cva('flex items-center gap-4')
+const headerLeftVariants = cva('flex items-center gap-4')
 
-export const headerCenterVariants = cva('flex flex-1 items-center justify-center gap-4')
+const headerCenterVariants = cva('flex flex-1 items-center justify-center gap-4')
 
-export const headerRightVariants = cva('flex items-center gap-4')
+const headerRightVariants = cva('flex items-center gap-4')
+
+export {
+	headerCenterVariants,
+	headerContainerVariants,
+	headerLeftVariants,
+	headerRightVariants,
+	headerVariants,
+}
