@@ -119,7 +119,7 @@ export const Link: Story = {
 		const canvas = within(canvasElement)
 		const button = canvas.getByRole('button')
 
-		await expect(button).toHaveClass(/text-accent/)
+		await expect(button).toHaveClass(/text-primary/)
 		await expect(button).toHaveClass(/underline-offset-4/)
 	},
 }
