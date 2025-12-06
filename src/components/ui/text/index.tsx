@@ -23,7 +23,13 @@ const TextPolymorphic = forwardRef<HTMLElement, TextComponentProps<AllowedTextEl
 		const Component = (as || 'p') as ElementType
 
 		return (
-			<Component className={cn(textVariants({ color, size }), className)} ref={ref} {...props}>
+			<Component
+				className={cn(textVariants({ color, size }), className)}
+				data-slot="text"
+				data-testid={`text-${as}`}
+				ref={ref}
+				{...props}
+			>
 				{children}
 			</Component>
 		)
