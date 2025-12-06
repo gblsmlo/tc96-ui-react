@@ -42,7 +42,7 @@ export const Sizes: Story = {
 		]
 
 		for (const level of levels) {
-			const element = canvas.getByText(level.text)
+			const element = canvas.getByTestId(level.className)
 			await expect(element).toBeInTheDocument()
 			await expect(element).toHaveTextContent(level.text)
 			await expect(element).toHaveClass(level.className)
@@ -51,10 +51,18 @@ export const Sizes: Story = {
 	},
 	render: () => (
 		<div className="space-y-4">
-			<Text size="sm">Small text (14px)</Text>
-			<Text size="base">Base text (16px)</Text>
-			<Text size="lg">Large text (18px)</Text>
-			<Text size="xl">Extra large text (20px)</Text>
+			<Text data-testid="text-sm" size="sm">
+				Small text (14px)
+			</Text>
+			<Text data-testid="text-base" size="base">
+				Base text (16px)
+			</Text>
+			<Text data-testid="text-lg" size="lg">
+				Large text (18px)
+			</Text>
+			<Text data-testid="text-xl" size="xl">
+				Extra large text (20px)
+			</Text>
 		</div>
 	),
 }
@@ -66,13 +74,11 @@ export const Colors: Story = {
 
 		const colorCases = [
 			{ className: 'text-primary', text: 'Primary color' },
-			{ className: 'text-secondary', text: 'Secondary color' },
 			{ className: 'text-muted', text: 'Muted color' },
-			{ className: 'text-destructive', text: 'Destructive color' },
 		]
 
 		for (const colorCase of colorCases) {
-			const element = canvas.getByText(colorCase.text)
+			const element = canvas.getByTestId(colorCase.className)
 			await expect(element).toBeInTheDocument()
 			await expect(element).toHaveTextContent(colorCase.text)
 			await expect(element).toHaveClass(colorCase.className)
@@ -81,9 +87,12 @@ export const Colors: Story = {
 	},
 	render: () => (
 		<div className="space-y-4">
-			<Text color="primary">Primary color</Text>
-			<Text color="muted">Muted color</Text>
-			<Text color="destructive">Destructive color</Text>
+			<Text color="primary" data-testid="text-primary">
+				Primary color
+			</Text>
+			<Text color="muted" data-testid="text-muted">
+				Muted color
+			</Text>
 		</div>
 	),
 }
@@ -117,13 +126,19 @@ export const Polymorphic: Story = {
 	},
 	render: () => (
 		<div className="flex gap-4">
-			<Text as="p">Paragraph text</Text>
-			<Text as="span">Inline span</Text>
-			<Text as="a" href="/docs">
+			<Text as="p" data-testid="text-p">
+				Paragraph text
+			</Text>
+			<Text as="span" data-testid="text-span">
+				Inline span
+			</Text>
+			<Text as="a" data-testid="text-a" href="/docs">
 				Link text
 			</Text>
-			<Text as="button">Button text</Text>
-			<Text as="label" htmlFor="input-id">
+			<Text as="button" data-testid="text-button">
+				Button text
+			</Text>
+			<Text as="label" data-testid="text-label" htmlFor="input-id">
 				Label text
 			</Text>
 		</div>

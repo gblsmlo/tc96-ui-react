@@ -59,9 +59,7 @@ import { Text } from '@/components/ui/text'
 ### Color Variants
 
 - `primary`: Primary brand color
-- `secondary`: Secondary brand color
 - `muted`: Muted/subdued text
-- `destructive`: Error/danger state
 
 ## Examples
 
@@ -189,9 +187,9 @@ const TextPolymorphic = forwardRef<HTMLElement, TextComponentProps<AllowedTextEl
   ({ as, children, size, color, className, ...props }, ref) => {
     const Component = (as || 'p') as ElementType
     return (
-      <Component 
-        className={cn(textVariants({ size, color }), className)} 
-        ref={ref} 
+      <Component
+        className={cn(textVariants({ size, color }), className)}
+        ref={ref}
         {...props}
       >
         {children}
