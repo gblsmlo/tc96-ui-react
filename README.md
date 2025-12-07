@@ -35,7 +35,10 @@ A modern, accessible React component library for product teams. Built on Tailwin
 - Ergonomics: simple, composable APIs with typed variants and sensible defaults.
 
 ## Installation
-Install the package in your app:
+
+For complete installation instructions, see the [Installation Guide](./docs/installation.md).
+
+**Quick Start:**
 
 ```sh
 pnpm add @tc96/ui-react
@@ -125,11 +128,24 @@ Project structure highlights:
 - `dist/` — build output (ESM, CJS, types, styles)
 
 ## Components
-- Button: variants and sizes for primary actions.
-- IconButton: compact button for icon-only actions.
-- Input: text input with size variants and a11y states.
 
-Explore stories via `pnpm dev`.
+### UI Components
+- **Avatar**: User profile images with fallback support
+- **Badge**: Status indicators and labels with multiple variants
+- **Button**: Primary action buttons with 7 variants and 3 sizes
+- **IconButton**: Compact button optimized for icon-only actions
+- **Heading**: Semantic headings with typography variants
+- **Text**: Text components with size and weight variants
+- **Stack**: Vertical layout container with spacing control
+- **Inline**: Horizontal layout container with gap control
+- **Input**: Form input field with size variants and accessibility states
+- **NavigationLinks**: Navigation link components with active states
+- **NavigationMenu**: Accessible navigation menu built on Radix UI
+
+### Block Components
+- **Header**: Reusable page header component
+
+Explore all components and their variants in Storybook via `pnpm dev`.
 
 ## Contributing & Issues
 - Found a bug or have a request? Open an issue:
@@ -141,4 +157,5 @@ Explore stories via `pnpm dev`.
 - Package name: `@tc96/ui-react`.
 
 ## License
-This repository’s license will be clarified in a future update. Until then, please open an issue for questions about usage.
+
+MIT License - see the [LICENSE](./LICENSE) file for details.
