@@ -52,7 +52,7 @@ Import the styles once (recommended in your app entry):
 
 ```ts
 // app entry (e.g., src/main.tsx)
-import '@tc96/ui-react/dist/styles/index.css'
+import '@tc96/ui-react/styles.css'
 ```
 
 Use components in your app:
