@@ -28,7 +28,7 @@ export default defineConfig({
 				/^@radix-ui\/.*/
 			],
 		},
-		emptyOutDir: false
+		emptyOutDir: true
 	},
   plugins: [react(), tailwindcss(), dts({
     entryRoot: 'src',
