@@ -96,7 +96,7 @@ The preset includes:
 - Animations for components
 - Inter font family
 
-See [TAILWIND_PRESET.md](./TAILWIND_PRESET.md) for detailed usage instructions.
+See [TAILWIND_PRESET.md](./docs/TAILWIND_PRESET.md) for detailed usage instructions.
 
 
 ## Local Development (Contributors)
