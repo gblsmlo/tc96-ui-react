@@ -1,7 +1,7 @@
 {
 	"name": "@tc96/ui-react",
 	"private": false,
-	"version": "0.8.1",
+	"version": "0.8.2",
 	"files": [
 		"dist"
 	],
@@ -18,7 +18,7 @@
 			"require": "./dist/index.js",
 			"default": "./dist/index.mjs"
 		},
-		"./styles.css": "./src/styles/index.css"
+		"./styles.css": "./dist/index.css"
 	},
 	"scripts": {
 		"dev": "storybook dev -p 6006",
