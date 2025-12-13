@@ -3,7 +3,7 @@ import * as AvatarPrimitive from '@radix-ui/react-avatar'
 import type { VariantProps } from 'class-variance-authority'
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react'
 import { forwardRef } from 'react'
-import { avatarFallbackVariants, avatarImageVariants, avatarVariants } from './avatar.variants'
+import { avatarImageVariants, avatarVariants } from './avatar.variants'
 
 type AvatarProps = ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> &
 	VariantProps<typeof avatarVariants>
@@ -39,7 +39,7 @@ const AvatarFallback = forwardRef<
 	ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >(({ className, ...props }, ref) => (
 	<AvatarPrimitive.Fallback
-		className={cn(avatarFallbackVariants({ className }))}
+		className="flex h-full w-full items-center justify-center rounded-full bg-foreground/10 text-foreground"
 		data-slot="avatar-fallback"
 		ref={ref}
 		{...props}
