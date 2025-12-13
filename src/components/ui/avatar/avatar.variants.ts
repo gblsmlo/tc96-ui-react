@@ -6,15 +6,11 @@ export const avatarVariants = cva('relative flex shrink-0 overflow-hidden rounde
 	},
 	variants: {
 		size: {
-			base: 'size-10',
-			lg: 'size-12',
-			sm: 'size-8',
+			base: 'size-10 text-sm',
+			lg: 'size-12 text-base',
+			sm: 'size-8 text-xs',
 		},
 	},
 })
 
 export const avatarImageVariants = cva('aspect-square h-full w-full')
-
-export const avatarFallbackVariants = cva(
-	'flex h-full w-full items-center justify-center rounded-full bg-muted text-muted-foreground',
-)
