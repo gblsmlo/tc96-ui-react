@@ -52,6 +52,16 @@ export default defineConfig({
   test: {
     projects: [
       {
+        // Unit test project for component tests
+        test: {
+          name: 'unit',
+          environment: 'jsdom',
+          setupFiles: ['./vitest.setup.ts'],
+          include: ['src/**/*.{test,spec}.{ts,tsx}'],
+          exclude: ['src/**/*.stories.{ts,tsx}', 'node_modules/**']
+        }
+      },
+      {
         extends: true,
         plugins: [
           // Run tests for Storybook stories
