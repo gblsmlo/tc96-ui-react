@@ -2,169 +2,101 @@
 <div align="center">
 
 # @tc96/ui-react
+A modern, accessible React component library for product teams
 
 [![npm version](https://img.shields.io/npm/v/@tc96/ui-react?style=flat&colorA=18181B&colorB=0EA5E9)](https://www.npmjs.com/package/@tc96/ui-react)
 [![npm downloads](https://img.shields.io/npm/dm/@tc96/ui-react?style=flat&colorA=18181B&colorB=0EA5E9)](https://www.npmjs.com/package/@tc96/ui-react)
 [![CI](https://github.com/gblsmlo/tc96-design-system/workflows/ci/badge.svg)](https://github.com/gblsmlo/tc96-design-system/actions)
 [![License](https://img.shields.io/github/license/gblsmlo/tc96-design-system?style=flat&colorA=18181B&colorB=0EA5E9)](https://github.com/gblsmlo/tc96-design-system/blob/main/LICENSE)
 
-A modern, accessible React component library for product teams. Built on Tailwind CSS v4, Radix UI primitives, and class-variance-authority, and distributed as `@tc96/ui-react`.
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react&logoColor=white&labelColor=18181B)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white&labelColor=18181B)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat&logo=tailwindcss&logoColor=white&labelColor=18181B)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat&logo=vite&logoColor=white&labelColor=18181B)
+![Storybook](https://img.shields.io/badge/Storybook-10-FF4785?style=flat&logo=storybook&logoColor=white&labelColor=18181B)
+![Test Coverage](https://img.shields.io/badge/Coverage-Vitest-729B1B?style=flat&logo=vitest&logoColor=white&labelColor=18181B)
 
 </div>
 
+## ✨ Overview
 
+- **Themeable**: Consistent UI powered by Tailwind v4 tokens (OKLCH color space)
+- **Accessible**: Built on Radix UI primitives with WCAG AA compliance and a11y testing
+- **Type-safe**: Typed variants with CVA for predictable APIs and excellent DX
+- **Tree-shakeable**: Dual ESM/CJS builds via Vite, optimized bundle size
+- **Tested**: Comprehensive Storybook stories with Vitest interaction tests
 
-## Overview
-- Consistent, themeable UI components powered by Tailwind v4 tokens (OKLCH).
-- Accessible by default using Radix UI primitives and a11y testing via Storybook.
-- Typed variants with CVA for predictable APIs and great DX.
-- Dual ESM/CJS builds via tsup, tree-shakeable, and type-safe.
-
-## Tech Stack
-- React 19 + TypeScript
-- Tailwind CSS v4 (CSS v4 `@theme`, `@plugin`, `@apply`)
-- Radix UI primitives
-- class-variance-authority (CVA)
-- Storybook 10 for docs and interaction tests
-- tsup for builds, Biome for linting
-
-## Goals
-- Reliability: stable, versioned components with changelog.
-- Accessibility: meet WCAG AA where applicable; a11y checks in Storybook.
-- Theming: first-class token support using OKLCH and Tailwind v4.
-- Ergonomics: simple, composable APIs with typed variants and sensible defaults.
 
 ## Installation
 
-For complete installation instructions, see the [Installation Guide](./docs/installation.md).
+```bash
+pnpm add @tc96/ui-react
+```
 
 **Quick Start:**
 
-```sh
-pnpm add @tc96/ui-react
-# or
-npm install @tc96/ui-react
-# or
-yarn add @tc96/ui-react
-```
-
-Import the styles once (recommended in your app entry):
-
-```ts
-// app entry (e.g., src/main.tsx)
-import '@tc96/ui-react/dist/styles.css'
-```
-
-> [!NOTE]
-> The import above (`dist/styles.css`) contains the pre-processed CSS with all Tailwind styles generated. This is recommended for most users.
-> 
-> **Advanced Usage**: If you want to run your own Tailwind/PostCSS pipeline, you can import the source CSS:
-> ```ts
-> import '@tc96/ui-react/styles.css' // Contains @theme, @apply, etc.
-> ```
-> *Requires Tailwind CSS 4 and PostCSS configured in your project.*
-
-Use components in your app:
-
 ```tsx
-import { Button } from '@tc96/ui-react'
+// 1. Import styles (once in your app entry)
+import '@tc96/ui-react/dist/styles.css'
 
-export default function Example() {
-  return <Button variant="solid" size="base">Click me</Button>
+// 2. Use components
+import { Button, Badge, Avatar } from '@tc96/ui-react'
+
+export default function App() {
+  return (
+    <div>
+      <Avatar src="/user.jpg" fallback="JD" />
+      <Badge variant="success">Active</Badge>
+      <Button variant="primary">Get Started</Button>
+    </div>
+  )
 }
 ```
 
-## Tailwind Configuration
+## Development
 
-To use the full design system with your own Tailwind configuration, import the preset:
-
-```ts
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
-import twincamPreset from "@tc96/ui-react/tailwind-preset";
-
-export default {
-  presets: [twincamPreset],
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@tc96/ui-react/dist/**/*.{js,mjs}",
-  ],
-  // Optional: extend the preset with your own customizations
-  theme: {
-    extend: {
-      // Add your custom styles here
-    },
-  },
-} satisfies Config;
-```
-
-The preset includes:
-- Design tokens (colors, spacing, typography)
-- Custom theme with dark mode support
-- Border radius system
-- Animations for components
-- Inter font family
-
-See [TAILWIND_PRESET.md](./docs/TAILWIND_PRESET.md) for detailed usage instructions.
-
-
-## Local Development (Contributors)
-Prerequisites: Node 18+ (recommended 22), pnpm.
-
-```sh
+```bash
+# Install dependencies
 pnpm install
 
-# Storybook (dev)
+# Start Storybook dev server
 pnpm dev
 
-# Type check
+# Run tests
+pnpm test
+pnpm test-storybook
+
+# Type checking
 pnpm check:type
 
-# Lint & fix
+# Lint & format
 pnpm lint:fix
 
 # Build library
 pnpm build
-
-# Build Storybook static
-pnpm build:storybook
 ```
 
-Project structure highlights:
-- `src/components/ui/<component>/` — component and its CVA variants
-- `src/stories/` — Storybook stories with interaction tests
-- `src/styles/index.css` — Tailwind v4 tokens and theme
-- `dist/` — build output (ESM, CJS, types, styles)
+## Project Structure:
+```
+src/
+├── components/ui/     # UI components with CVA variants
+├── stories/           # Storybook stories & interaction tests
+├── styles/            # Tailwind v4 design tokens
+└── index.ts           # Public exports
 
-## Components
+dist/                  # Build output (ESM, CJS, types, CSS)
+```
 
-### UI Components
-- **Avatar**: User profile images with fallback support
-- **Badge**: Status indicators and labels with multiple variants
-- **Button**: Primary action buttons with 7 variants and 3 sizes
-- **IconButton**: Compact button optimized for icon-only actions
-- **Heading**: Semantic headings with typography variants
-- **Text**: Text components with size and weight variants
-- **Stack**: Vertical layout container with spacing control
-- **Inline**: Horizontal layout container with gap control
-- **Input**: Form input field with size variants and accessibility states
-- **NavigationLinks**: Navigation link components with active states
-- **NavigationMenu**: Accessible navigation menu built on Radix UI
+## Contributing
 
-### Block Components
-- **Header**: Reusable page header component
+Contributions are welcome! Please:
 
-Explore all components and their variants in Storybook via `pnpm dev`.
+1. Check existing [issues](https://github.com/gblsmlo/tc96-ui-react/issues) or create a new one
+2. Fork the repository and create a feature branch
+3. Run `pnpm check:type` and `pnpm lint:fix` before submitting
+4. Submit a Pull Request with a clear description
 
-## Contributing & Issues
-- Found a bug or have a request? Open an issue:
-  - https://github.com/gblsmlo/tc96-ui-react/issues
-- Pull Requests are welcome. Please run `pnpm check:type` and `pnpm lint:fix` before submitting.
-
-## Versioning & Releases
-- Semantic Versioning (SemVer). See `CHANGELOG.md` for details.
-- Package name: `@tc96/ui-react`.
 
 ## License
+MIT License - see [LICENSE](./LICENSE) for details.
 
-MIT License - see the [LICENSE](./LICENSE) file for details.
