@@ -14,7 +14,7 @@ export const textVariants = cva('leading-normal font-normal', {
 		},
 		variant: {
 			muted: 'text-muted',
-			primary: 'text-primary',
+			primary: 'text-foreground',
 		},
 	},
 })
