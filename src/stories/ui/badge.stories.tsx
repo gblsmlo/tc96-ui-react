@@ -1,9 +1,36 @@
 import { Badge, type BadgeProps } from '@/components/ui/badge'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { CheckCircle } from 'lucide-react'
+import { AlertTriangle, CheckCircle, XCircle } from 'lucide-react'
 import { expect, within } from 'storybook/test'
 
 const meta = {
+	args: {
+		'data-testid': 'badge',
+	},
+	argTypes: {
+		children: {
+			control: 'text',
+			description: 'Content to display inside the badge',
+			table: {
+				type: { summary: 'ReactNode' },
+			},
+		},
+		size: {
+			control: 'inline-radio',
+			defaultValue: 'base',
+			description: 'Defines the size of the Badge component.',
+			options: ['sm', 'base'],
+		},
+		variant: {
+			control: 'select',
+			description: 'Defines the variant style of the Badge component.',
+			options: ['primary', 'secondary', 'outline', 'success', 'warning', 'destructive'],
+			table: {
+				defaultValue: { summary: 'secondary' },
+				type: { summary: 'primary | secondary | outline | success | warning | destructive' },
+			},
+		},
+	},
 	component: Badge,
 	tags: ['autodocs'],
 	title: 'Components/Badge',
@@ -12,50 +39,48 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+export const Default: Story = {
 	args: {
-		children: 'Primary',
-		variant: 'primary',
-	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge')
-
-		await expect(badge).toHaveClass(/inline-flex/)
-		await expect(badge).toHaveClass(/items-center/)
-		await expect(badge).toHaveClass(/rounded-sm/)
-		await expect(badge).toHaveClass(/border/)
-		await expect(badge).toHaveClass(/text-sm/)
-		await expect(badge).toHaveClass(/font-medium/)
-
-		await expect(badge).toHaveClass(/bg-background/)
-		await expect(badge).toHaveClass(/border/)
-
-		await expect(badge).toHaveTextContent('Primary')
-	},
-	render: () => <Badge data-testid="badge">Primary</Badge>,
-}
-
-export const Secondary: Story = {
-	args: {
-		children: 'Secondary',
+		children: 'Default',
 		variant: 'secondary',
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
 		const badge = canvas.getByTestId('badge')
 
-		await expect(badge).toHaveClass(/bg-secondary/)
-		await expect(badge).toHaveClass(/text-secondary-foreground/)
-		await expect(badge).toHaveClass(/border-transparent/)
+		await expect(badge).toHaveAttribute('data-slot', 'badge')
 
-		await expect(badge).toHaveTextContent('Secondary')
+		await expect(badge).toHaveClass(
+			'border border-secondary bg-secondary text-secondary-foreground',
+			'font-medium px-3 py-1 text-sm',
+		)
 	},
-	render: () => (
-		<Badge data-testid="badge" variant="secondary">
-			Secondary
-		</Badge>
-	),
+}
+
+export const Primary: Story = {
+	args: {
+		children: 'Primary Color',
+		variant: 'primary',
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement)
+		const badge = canvas.getByTestId('badge')
+
+		await expect(badge).toHaveClass(/border/, /bg-primary/, /text-primary-foreground/)
+	},
+}
+
+export const Outline: Story = {
+	args: {
+		children: 'Outline',
+		variant: 'outline',
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement)
+		const badge = canvas.getByTestId('badge')
+
+		await expect(badge).toHaveClass(/border/, /bg-transparent/, /text-secondary-foreground/)
+	},
 }
 
 export const States: Story = {
@@ -66,19 +91,25 @@ export const States: Story = {
 		await expect(badges.length).toBeGreaterThanOrEqual(3)
 
 		const successBadge = canvas.getByTestId('badge-success')
-		await expect(successBadge).toHaveClass(/bg-lime-100/)
-		await expect(successBadge).toHaveClass(/border-lime-200/)
-		await expect(successBadge).toHaveClass(/text-lime-700/)
+		await expect(successBadge).toHaveClass(
+			/bg-success/,
+			/border-transparent/,
+			/text-success-foreground/,
+		)
 
 		const warningBadge = canvas.getByTestId('badge-warning')
-		await expect(warningBadge).toHaveClass(/bg-amber-100/)
-		await expect(warningBadge).toHaveClass(/border-amber-200/)
-		await expect(warningBadge).toHaveClass(/text-amber-700/)
+		await expect(warningBadge).toHaveClass(
+			/bg-warning/,
+			/border-transparent/,
+			/text-warning-foreground/,
+		)
 
 		const errorBadge = canvas.getByTestId('badge-error')
-		await expect(errorBadge).toHaveClass(/bg-red-100/)
-		await expect(errorBadge).toHaveClass(/border-red-200/)
-		await expect(errorBadge).toHaveClass(/text-red-700/)
+		await expect(errorBadge).toHaveClass(
+			/border-transparent/,
+			/bg-destructive/,
+			/text-destructive-foreground/,
+		)
 	},
 	render: () => (
 		<div className="flex items-center gap-3">
@@ -88,8 +119,65 @@ export const States: Story = {
 			<Badge data-testid="badge-warning" variant="warning">
 				Warning
 			</Badge>
-			<Badge data-testid="badge-error" variant="error">
+			<Badge data-testid="badge-error" variant="destructive">
 				Error
+			</Badge>
+		</div>
+	),
+}
+
+export const StatesWithIcons: Story = {
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement)
+
+		const success = canvas.getByTestId('badge-success-icon')
+		await expect(success.querySelector('svg')).toBeInTheDocument()
+		await expect(success).toHaveClass(/bg-success/, /text-success-foreground/)
+
+		const warning = canvas.getByTestId('badge-warning-icon')
+		await expect(warning.querySelector('svg')).toBeInTheDocument()
+		await expect(warning).toHaveClass(/bg-warning/, /text-warning-foreground/)
+
+		const error = canvas.getByTestId('badge-error-icon')
+		await expect(error.querySelector('svg')).toBeInTheDocument()
+		await expect(error).toHaveClass(/bg-destructive/, /text-destructive-foreground/)
+	},
+	render: () => (
+		<div className="flex items-center gap-3">
+			<Badge data-testid="badge-success-icon" variant="success">
+				<CheckCircle />
+				Success
+			</Badge>
+			<Badge data-testid="badge-warning-icon" variant="warning">
+				<AlertTriangle />
+				Warning
+			</Badge>
+			<Badge data-testid="badge-error-icon" variant="destructive">
+				<XCircle />
+				Error
+			</Badge>
+		</div>
+	),
+}
+
+export const Sizes: Story = {
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement)
+		const small = canvas.getByTestId('badge-size-sm')
+		await expect(small).toBeInTheDocument()
+		await expect(small).toHaveClass(/px-2/, /py-1/, /text-xs/)
+
+		const base = canvas.getByTestId('badge-size-base')
+		await expect(base).toBeInTheDocument()
+		await expect(base).toHaveClass(/px-3/, /py-1/, /text-sm/)
+	},
+	render: () => (
+		<div className="flex items-center gap-3">
+			<Badge data-testid="badge-size-sm" size="sm" variant="secondary">
+				Small
+			</Badge>
+			<Badge data-testid="badge-size-base" size="base" variant="secondary">
+				Base
 			</Badge>
 		</div>
 	),
@@ -98,16 +186,13 @@ export const States: Story = {
 export const WithIcon: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement)
-		const badge = canvas.getByTestId('badge-icon')
-
-		await expect(badge).toHaveClass(/bg-background/)
-		await expect(badge).toHaveClass(/border/)
+		const badge = canvas.getByTestId('badge')
 
 		const icon = badge.querySelector('svg')
 		await expect(icon).toBeInTheDocument()
 	},
 	render: () => (
-		<Badge data-testid="badge-icon" variant="primary">
+		<Badge data-testid="badge" variant="secondary">
 			<CheckCircle />
 			Verified
 		</Badge>
